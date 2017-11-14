@@ -36,21 +36,22 @@ while power > 0:
     pressed = pygame.key.get_pressed()
     h_axis_pos = my_joystick.get_axis(0)
     v_axis_pos = my_joystick.get_axis(1)
-    print (h_axis_pos, v_axis_pos)
+    # print (h_axis_pos, v_axis_pos)
 
-    if pressed[pygame.K_LEFT]:
+    if pressed[pygame.K_LEFT] or h_axis_pos == -1:
         power = power - 1
         kiri = kiri - 10
 
-    if pressed[pygame.K_RIGHT]:
+    if pressed[pygame.K_RIGHT] or h_axis_pos == 0.999969482421875:
         power = power + 1
         kiri = kiri + 10
 
-    if pressed[pygame.K_UP]:
+    if pressed[pygame.K_UP] or v_axis_pos == -1:
         atas = atas - 10
 
-    if pressed[pygame.K_DOWN]:
+    if pressed[pygame.K_DOWN] or v_axis_pos == 0.999969482421875:
         atas = atas + 10
+
     player.rect.topleft = [kiri, atas]
     screen.fill((0, 0, 0))
     screen.blit(player.image, player.rect)
