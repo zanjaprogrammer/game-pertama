@@ -4,12 +4,19 @@ import pygame
 pygame.init()
 screen = pygame.display.set_mode((400, 300))
 player = pygame.sprite.Sprite()
-player.image = pygame.image.load('playerkiri.png')
+player.image = pygame.image.load('redship.png')
 player.rect = player.image.get_rect()
-kiri = 200
-atas = 250
-player.rect.topleft = [kiri, 250]
-screen.blit(player.image, player.rect)
+
+enemy = pygame.sprite.Sprite()
+enemy.image = pygame.image.load('blueship.png')
+enemy.rect = player.image.get_rect()
+kiri_player = 200
+atas_player = 250
+player.rect.topleft = [kiri_player, atas_player]
+
+kiri_enemy = 300
+atas_enemy = atas_player
+enemy.rect.topleft = [kiri_enemy, atas_enemy]
 clock = pygame.time.Clock()
 
 
@@ -40,21 +47,22 @@ while power > 0:
 
     if pressed[pygame.K_LEFT] or h_axis_pos == -1:
         power = power - 1
-        kiri = kiri - 10
+        kiri_player = kiri_player - 10
 
     if pressed[pygame.K_RIGHT] or h_axis_pos == 0.999969482421875:
         power = power + 1
-        kiri = kiri + 10
+        kiri_player = kiri_player + 10
 
     if pressed[pygame.K_UP] or v_axis_pos == -1:
-        atas = atas - 10
+        atas_player = atas_player - 10
 
     if pressed[pygame.K_DOWN] or v_axis_pos == 0.999969482421875:
-        atas = atas + 10
+        atas_player = atas_player + 10
 
-    player.rect.topleft = [kiri, atas]
-    screen.fill((0, 0, 0))
+    player.rect.topleft = [kiri_player, atas_player]
+    screen.fill((255,0 ,0 ))
     screen.blit(player.image, player.rect)
+    screen.blit(enemy.image, enemy.rect)
 
     pygame.display.flip()
     clock.tick(40)
