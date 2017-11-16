@@ -30,9 +30,11 @@ print ("There is ", joystick_count, "joystick/s")
 if joystick_count == 0:
     print ("Error, I did not find any joysticks")
 else:
-    my_joystick = pygame.joystick.Joystick(1)
-    my_joystick.init()
+    player2_joystick = pygame.joystick.Joystick(1)
+    player2_joystick.init()
 
+    player1_joystick = pygame.joystick.Joystick(0)
+    player1_joystick.init()
 
 while power > 0:
     # print('Game is running')
@@ -41,22 +43,27 @@ while power > 0:
             power = -1
 
     pressed = pygame.key.get_pressed()
-    h_axis_pos = my_joystick.get_axis(0)
-    v_axis_pos = my_joystick.get_axis(1)
+    h2 = player2_joystick.get_axis(0)
+    v2 = player2_joystick.get_axis(1)
     # print (h_axis_pos, v_axis_pos)
 
-    if pressed[pygame.K_LEFT] or h_axis_pos == -1:
+    h1 = player1_joystick.get_axis(0)
+    v1 = player1_joystick.get_axis(1)
+    print (h1, v1)
+
+
+    if pressed[pygame.K_LEFT] or h2 == -1:
         power = power - 1
         kiri_player = kiri_player - 10
 
-    if pressed[pygame.K_RIGHT] or h_axis_pos == 0.999969482421875:
+    if pressed[pygame.K_RIGHT] or h2 == 0.999969482421875:
         power = power + 1
         kiri_player = kiri_player + 10
 
-    if pressed[pygame.K_UP] or v_axis_pos == -1:
+    if pressed[pygame.K_UP] or v2 == -1:
         atas_player = atas_player - 10
 
-    if pressed[pygame.K_DOWN] or v_axis_pos == 0.999969482421875:
+    if pressed[pygame.K_DOWN] or v2 == 0.999969482421875:
         atas_player = atas_player + 10
 
     player.rect.topleft = [kiri_player, atas_player]
