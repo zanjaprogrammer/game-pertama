@@ -51,28 +51,29 @@ while power > 0:
     v1 = player1_joystick.get_axis(1)
     print (h1, v1)
 
+    tabrakan = pygame.sprite.collide_rect(player, enemy)
 
-    if pressed[pygame.K_LEFT] or h2 == -1:
+    if not tabrakan and (pressed[pygame.K_LEFT] or h2 == -1):
         power = power - 1
         kiri_player = kiri_player - 10
 
-    if pressed[pygame.K_RIGHT] or h2 == 0.999969482421875:
+    if not tabrakan and (pressed[pygame.K_RIGHT] or h2 == 0.999969482421875):
         power = power + 1
         kiri_player = kiri_player + 10
 
-    if pressed[pygame.K_UP] or v2 == -1:
+    if not tabrakan and (pressed[pygame.K_UP] or v2 == -1):
         atas_player = atas_player - 10
 
-    if pressed[pygame.K_DOWN] or v2 == 0.999969482421875:
+    if not tabrakan and (pressed[pygame.K_DOWN] or v2 == 0.999969482421875):
         atas_player = atas_player + 10
 
-    if h1 == -1:
+    if not tabrakan and (h1 == -1):
         kiri_enemy = kiri_enemy - 10
-    if h1 == 0.999969482421875:
+    if not tabrakan and (h1 == 0.999969482421875):
         kiri_enemy = kiri_enemy + 10
-    if v1 == -1:
+    if not tabrakan and (v1 == -1):
         atas_enemy = atas_enemy - 10
-    if v1 == 0.999969482421875:
+    if not tabrakan and (v1 == 0.999969482421875):
         atas_enemy = atas_enemy + 10
 
     player.rect.topleft = [kiri_player, atas_player]
