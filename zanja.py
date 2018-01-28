@@ -30,11 +30,24 @@ print ("There is ", joystick_count, "joystick/s")
 if joystick_count == 0:
     print ("Error, I did not find any joysticks")
 else:
-    player2_joystick = pygame.joystick.Joystick(1)
-    player2_joystick.init()
+    for j in range(0, joystick_count):
+        name = pygame.joystick.Joystick(j).get_name().strip()
+        print (name)
+        if name == 'Twin USB Gamepad':
+            player1_joystick = pygame.joystick.Joystick(j)
+            player1_joystick.init()
+        if name == 'Controller (Gamepad F310)':
+            player2_joystick = pygame.joystick.Joystick(j)
+            player2_joystick.init()
 
-    player1_joystick = pygame.joystick.Joystick(0)
-    player1_joystick.init()
+
+
+
+
+
+
+
+
 
 while power > 0:
     # print('Game is running')
