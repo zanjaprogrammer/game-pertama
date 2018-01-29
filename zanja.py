@@ -2,21 +2,25 @@ import keyboard
 import pygame
 
 pygame.init()
-screen = pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN)
-player = pygame.sprite.Sprite()
-player.image = pygame.image.load('redship.png')
-player.rect = player.image.get_rect()
+# screen = pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN)
+screen = pygame.display.set_mode((1920, 1080))
+player2 = pygame.sprite.Sprite()
+player2.image = pygame.image.load('redship.png')
+player2.rect = player2.image.get_rect()
 
-enemy = pygame.sprite.Sprite()
-enemy.image = pygame.image.load('blueship.png')
-enemy.rect = player.image.get_rect()
+player1 = pygame.sprite.Sprite()
+player1.image = pygame.image.load('blueship.png')
+player1.rect = player2.image.get_rect()
 kiri_player = 200
 atas_player = 250
-player.rect.topleft = [kiri_player, atas_player]
+player2.rect.topleft = [kiri_player, atas_player]
+
+peluru1 = pygame.sprite.Sprite()
+peluru1.image = pygame.image.load('blueship.png')
 
 kiri_enemy = 300
 atas_enemy = atas_player
-enemy.rect.topleft = [kiri_enemy, atas_enemy]
+player1.rect.topleft = [kiri_enemy, atas_enemy]
 clock = pygame.time.Clock()
 
 
@@ -65,9 +69,12 @@ while power > 0:
 
     h1 = player1_joystick.get_axis(0)
     v1 = player1_joystick.get_axis(1)
-    print (h1, v1)
+    # print (h1, v1)
 
-    tabrakan = pygame.sprite.collide_rect(player, enemy)
+    r1 = player1_joystick.get_button(5)
+    print (r1)
+
+    tabrakan = pygame.sprite.collide_rect(player2, player1)
 
     if (pressed[pygame.K_LEFT] or h2 == -1):
         power = power - 1
@@ -92,12 +99,12 @@ while power > 0:
     if (v1 == 0.999969482421875):
         atas_enemy = atas_enemy + 10
 
-    player.rect.topleft = [kiri_player, atas_player]
-    enemy.rect.topleft = [kiri_enemy, atas_enemy]
+    player2.rect.topleft = [kiri_player, atas_player]
+    player1.rect.topleft = [kiri_enemy, atas_enemy]
     # screen.fill((255,0 ,0 ))
     screen.blit(bg, (0, 0))
-    screen.blit(player.image, player.rect)
-    screen.blit(enemy.image, enemy.rect)
+    screen.blit(player2.image, player2.rect)
+    screen.blit(player1.image, player1.rect)
 
     pygame.display.flip()
     clock.tick(40)
