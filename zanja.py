@@ -16,7 +16,7 @@ atas_player = 250
 player2.rect.topleft = [kiri_player, atas_player]
 
 peluru1 = pygame.sprite.Sprite()
-peluru1.image = pygame.image.load('blueship.png')
+peluru1.image = pygame.image.load('pelurubiru.png')
 
 kiri_enemy = 300
 atas_enemy = atas_player
@@ -71,8 +71,12 @@ while power > 0:
     v1 = player1_joystick.get_axis(1)
     # print (h1, v1)
 
+    # tombol senjata
     r1 = player1_joystick.get_button(5)
-    print (r1)
+    if r1 == 1:
+        # gambar peluru
+
+        print (r1)
 
     tabrakan = pygame.sprite.collide_rect(player2, player1)
 
@@ -105,6 +109,8 @@ while power > 0:
     screen.blit(bg, (0, 0))
     screen.blit(player2.image, player2.rect)
     screen.blit(player1.image, player1.rect)
+    if r1 == 1:
+        screen.blit(peluru1.image, player1.rect)
 
     pygame.display.flip()
     clock.tick(40)
